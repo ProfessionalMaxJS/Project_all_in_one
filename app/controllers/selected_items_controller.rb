@@ -1,0 +1,2 @@
+class SelectedItemsController < ApplicationController
+end
