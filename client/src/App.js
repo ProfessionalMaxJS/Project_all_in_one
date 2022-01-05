@@ -11,11 +11,13 @@ import Signup from "./pages/Signup";
 import SignupForm from "./pages/SignupForm";
 import SigninForm from "./pages/SigninForm";
 import UserPg from "./pages/UserPg";
-import Cart from "./pages/Cart"
+import Cart from "./pages/Cart";
+import Cookies from "js-cookie";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
   function toggle() {
     setIsOpen(!isOpen);
   }
@@ -34,10 +36,25 @@ function App() {
     };
   }, [window.innerWidth]);
 
+  useEffect(() => {
+    fetch("/me")
+      .then((r) => r.json())
+      .catch((err) => {
+        console.log(err);
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
   return (
     // These custom colors are created in the tailwind config file
     <>
-      <Navbar handleToggle={toggle} />
+      <Navbar
+        handleToggle={toggle}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        setUserData={setUserData}
+      />
       <Dropdown isOpen={isOpen} handleToggle={toggle} />
       <Routes>
         {/* for the route, it doesn't want a child but a child element  */}
@@ -45,7 +62,16 @@ function App() {
         <Route path="/Menu" element={<Menu />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/SignupForm" element={<SignupForm />} />
-        <Route path="/SigninForm" element={<SigninForm />} />
+        <Route
+          path="/SigninForm"
+          element={
+            <SigninForm
+              setUserData={setUserData}
+              setIsLoggedIn={setIsLoggedIn}
+              userData={userData}
+            />
+          }
+        />
         <Route path="/UserPg" element={<UserPg />} />
         <Route path="/Cart" element={<Cart />} />
       </Routes>

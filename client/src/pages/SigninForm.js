@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Avatar from "../images/AvatarMaker.png";
 
-function SigninForm() {
+function SigninForm({ setUserData, setIsLoggedIn, userData }) {
   const [user, setUser] = useState({
     name: "",
     password: "",
@@ -22,14 +22,19 @@ function SigninForm() {
       body: JSON.stringify(user),
     })
       .then((r) => r.json())
-      .catch((err) => console.log(err))
-      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(err);
+      })
+      .then((data) => {
+        setUserData(data);
+        if (Object.keys(data).length !== 0) {
+          setIsLoggedIn(false);
+        }
+      })
       .then(
         setUser({
           name: "",
-          email: "",
           password: "",
-          password_confirmation: "",
         })
       );
   }
@@ -48,7 +53,7 @@ function SigninForm() {
             name="name"
             type="text"
             placeholder="username"
-            class="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg rounded"
+            class="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg rounded"
             value={user.name}
             onChange={update}
           />
@@ -66,7 +71,7 @@ function SigninForm() {
         </div>
         <Link
           onClick={handleSignIn}
-          to="/SigninForm"
+          to="/UserPg"
           className="mt-5 py-6 px-10 bg-cyan-300 shadow-lg rounded-full text-3xl hover:bg-cyan-100 transition duration-300 ease-in-out flex items-center"
         >
           Sign In

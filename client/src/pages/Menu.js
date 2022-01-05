@@ -6,7 +6,7 @@ function Menu() {
   const [bestSellers, setBestSellers] = useState(null);
 
   useEffect(() => {
-    fetch('/items')
+    fetch("/items")
       .then((r) => r.json())
       .then((d) => {
         const tres = d.slice(0, 3);
