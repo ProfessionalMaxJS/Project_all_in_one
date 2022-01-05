@@ -6,15 +6,15 @@ function Menu() {
   const [bestSellers, setBestSellers] = useState(null);
 
   useEffect(() => {
-    fetch("/items")
+    fetch('/items')
       .then((r) => r.json())
       .then((d) => {
         const tres = d.slice(0, 3);
         setBestSellers(d);
+        console.log(d);
       });
   }, []);
 
-  console.log(bestSellers);
   // grid grid-cols-3 gap-10
 
   return (

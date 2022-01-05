@@ -3,17 +3,36 @@ import ImageOne from "../images/chakra-waffle.jpeg";
 import { Link } from "react-router-dom";
 
 function ItemCard({ item }) {
+  // const [foodData, setFoodData] = useState({...item})
+
+  function handleAddToCart(){
+    console.log(item.id)
+      fetch("/selected_items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({item_id:item.id}),
+      })
+        .then(r => r.json())
+        .catch(err => console.log(err))
+        .then(data => console.log(data))
+        // .then(setUser({name:"", email:"", password:"",password_confirmation:""}))
+  }
+
   const [shown, setIsShown] = useState(false);
+  
   return (
     <div className="  bg-black mb-1 flex flex-col items-center shadow-lg rounded ">
       <img src={ImageOne} alt="egg" className="rounded" />
       <h2 className="font-bold text-xl text-white">{item.name}</h2>
       <p className="text-white text-center italic">{item.description}</p>
       <p className="text-white text-center text-sm">${item.price}</p>
-      <Link
+      <button
+        onClick={handleAddToCart}
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
-        to="/SignupForm"
+        // to="/SignupForm"
         className="mt-1 mb-1 py-1 px-5 bg-cyan-300 shadow-lg rounded-full text-xl hover:bg-cyan-200 transition duration-300 ease-in-out flex items-center justify-around"
       >
         <div className="hover:animate-pulse flex items-center justify-around">
@@ -33,7 +52,7 @@ function ItemCard({ item }) {
             />
           </svg>
         </div>
-      </Link>
+      </button>
     </div>
   );
 }
