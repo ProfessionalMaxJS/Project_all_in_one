@@ -13,18 +13,25 @@ function SigninForm() {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 
-  function handleSignIn(){
-      fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then(r => r.json())
-        .catch(err => console.log(err))
-        .then(data => console.log(data))
-        .then(setUser({name:"", email:"", password:"",password_confirmation:""}))
+  function handleSignIn() {
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((r) => r.json())
+      .catch((err) => console.log(err))
+      .then((data) => console.log(data))
+      .then(
+        setUser({
+          name: "",
+          email: "",
+          password: "",
+          password_confirmation: "",
+        })
+      );
   }
 
   // console.log(user);
