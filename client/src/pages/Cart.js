@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
-function Cart() {
+function Cart({change, setChange}) {
   const [items, setItems] = useState([]);
-  const [change, setChange] = useState(0);
+  // const [change, setChange] = useState(0);
 
   useEffect(() => {
     fetch("/shoppingcart")

@@ -8,6 +8,7 @@ function Navbar({
   setIsLoggedIn,
   setUserData,
   change,
+  // setChange
 }) {
   const [count, setCount] = useState(null);
   const [countu, setCountu] = useState(null);

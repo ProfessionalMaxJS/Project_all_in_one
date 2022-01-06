@@ -39,13 +39,16 @@ function App() {
   useEffect(() => {
     fetch("/me")
       .then((r) => r.json())
-      .catch((err) => {
-        console.log(err);
-      })
       .then((data) => {
         console.log(data);
+        if (data.errors) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+        }
       });
   }, []);
+
   return (
     // These custom colors are created in the tailwind config file
     <>
@@ -55,6 +58,7 @@ function App() {
         setIsLoggedIn={setIsLoggedIn}
         setUserData={setUserData}
         change={change}
+        setChange={setChange}
       />
       <Dropdown isOpen={isOpen} handleToggle={toggle} />
       <Routes>
@@ -74,7 +78,7 @@ function App() {
           }
         />
         <Route path="/UserPg" element={<UserPg />} />
-        <Route path="/Cart" element={<Cart setChange={setChange} />} />
+        <Route path="/Cart" element={<Cart change={change} setChange={setChange} />} />
       </Routes>
       {/* <div className=" h-screen bg-gradient bg-gradient-to-tr from-theme-blue to-theme-pink ">
         <div className=""> */}

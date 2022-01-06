@@ -13,10 +13,9 @@ console.log(item.id)
   })
     .then((r) => r.json())
     .catch((err) => console.log(err))
-    .then((data) => {
-      setChange(Math.random());
-    });
-}
+    .then(setChange(Math.random()));
+    };
+
 
   return (
     <div className="  bg-black mx-auto flex justify-between items-center  shadow-lg rounded p-2">
