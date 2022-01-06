@@ -1,5 +1,5 @@
 class SelectedItemsController < ApplicationController
-
+    skip_before_action :authorize, only: [:index]
     def index    
         # byebug
         render json: SelectedItem.all, include: :item, status: :ok
@@ -7,7 +7,7 @@ class SelectedItemsController < ApplicationController
 
     def show
     if session[:user_id]
-        render json: SelectedItem.all.filter{|si| si[:user_id]==session[:user_id]}.map{|si| si.item}, status: :ok
+        render json: @current_user.selected_items.map{|si| si.item}, status: :ok
     else
         render json: {error: "FORBIDDEN"}, status: :unauthorized
     end
@@ -21,14 +21,18 @@ class SelectedItemsController < ApplicationController
 
 
 def destroy
-    selected_items_array = SelectedItem.all.filter{|si| si[:user_id]==session[:user_id]}
+    # byebug
+    @current_user.selected_items.map{|si| @current_user.purchased_items.create(item_id: si[:item_id], quantity_purchased: si[:quantity_selected])}
         # byebug
-    selected_items_array.map{|si| PurchasedItem.create(user_id: si[:user_id], item_id: si[:item_id], quantity_purchased: si[:quantity_selected])}
-        #byebug
-    selected_items_array.map{|si| si.destroy}
-        # byebug
-    render json: {}, status: :no_content
+    if @current_user.selected_items.length>0
+        points = @current_user.point_tracker
+        points +=1
+        @current_user.update(point_tracker: points)
     end
+    @current_user.selected_items.map{|si| si.destroy}
+        # byebug
+    render json: {"Thanks for your purchase. Points on your account": @current_user[:point_tracker]}, status: :ok
+end
 
     private
 

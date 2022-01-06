@@ -24,7 +24,7 @@ function ItemCard({ item }) {
       // function handleQty(e){
       //   setQty(e.target.value)
       //   console.log(e.target.value)
-      // }
+    // }
 
   const [shown, setIsShown] = useState(false);
   
