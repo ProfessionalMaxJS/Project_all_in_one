@@ -17,6 +17,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userData, setUserData] = useState(null);
+  const [change, setChange] = useState(null);
   function toggle() {
     setIsOpen(!isOpen);
   }
@@ -53,12 +54,13 @@ function App() {
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         setUserData={setUserData}
+        change={change}
       />
       <Dropdown isOpen={isOpen} handleToggle={toggle} />
       <Routes>
         {/* for the route, it doesn't want a child but a child element  */}
         <Route path="/" element={<Home />} />
-        <Route path="/Menu" element={<Menu />} />
+        <Route path="/Menu" element={<Menu setChange={setChange} />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/SignupForm" element={<SignupForm />} />
         <Route
@@ -72,7 +74,7 @@ function App() {
           }
         />
         <Route path="/UserPg" element={<UserPg />} />
-        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Cart" element={<Cart setChange={setChange} />} />
       </Routes>
       {/* <div className=" h-screen bg-gradient bg-gradient-to-tr from-theme-blue to-theme-pink ">
         <div className=""> */}

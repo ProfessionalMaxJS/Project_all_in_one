@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/Logo.jpeg";
 
-function Navbar({ handleToggle, isLoggedIn, setIsLoggedIn, setUserData }) {
+function Navbar({
+  handleToggle,
+  isLoggedIn,
+  setIsLoggedIn,
+  setUserData,
+  change,
+}) {
   const [count, setCount] = useState(null);
   const [countu, setCountu] = useState(null);
   function handleSignOut() {
@@ -34,7 +40,7 @@ function Navbar({ handleToggle, isLoggedIn, setIsLoggedIn, setUserData }) {
         let tot = newData.reduce((counter, nD) => (counter += nD));
         setCountu(tot);
       });
-  }, []);
+  }, [change]);
 
   return (
     <nav

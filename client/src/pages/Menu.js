@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ItemCard from "../components/ItemCard";
 
-function Menu() {
+function Menu({ setChange }) {
   const [bestSellers, setBestSellers] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,9 @@ function Menu() {
       <div className=" pt-3 ml-3 grid lg:grid-cols-3 md:grid-cols-3 gap-3 rounded ">
         {bestSellers
           ? bestSellers.map((item) => {
-              return <ItemCard key={item.id} item={item} />;
+              return (
+                <ItemCard setChange={setChange} key={item.id} item={item} />
+              );
             })
           : []}
       </div>

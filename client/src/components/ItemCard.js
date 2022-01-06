@@ -2,32 +2,35 @@ import React, { useState } from "react";
 import ImageOne from "../images/chakra-waffle.jpeg";
 import { Link } from "react-router-dom";
 
-function ItemCard({ item }) {
+function ItemCard({ item, setChange }) {
   // const [foodData, setFoodData] = useState({...item})
 
-  function handleAddToCart(){
-    console.log(item.id)
+  function handleAddToCart() {
+    console.log(item.id);
     fetch("/selected_items", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({item_id:item.id/*, quantity_selected:qty*/}),
-        })
-          .then(r => r.json())
-          .catch(err => console.log(err))
-          .then(data => console.log(data))
-          // .then(setQty(1))
-      }
-      
-      // const [qty, setQty] = useState(1)
-      // function handleQty(e){
-      //   setQty(e.target.value)
-      //   console.log(e.target.value)
-    // }
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item_id: item.id /*, quantity_selected:qty*/ }),
+    })
+      .then((r) => r.json())
+      .catch((err) => console.log(err))
+      .then((data) => {
+        console.log(data);
+        setChange(Math.random());
+      });
+    // .then(setQty(1))
+  }
+
+  // const [qty, setQty] = useState(1)
+  // function handleQty(e){
+  //   setQty(e.target.value)
+  //   console.log(e.target.value)
+  // }
 
   const [shown, setIsShown] = useState(false);
-  
+
   return (
     <div className="  bg-black mb-1 flex flex-col items-center shadow-lg rounded ">
       <img src={ImageOne} alt="egg" className="rounded" />
@@ -35,14 +38,7 @@ function ItemCard({ item }) {
       <p className="text-white text-center italic">{item.description}</p>
       <p className="text-white text-center text-sm">${item.price}</p>
 
-
-
-
       {/* <input value={qty} onChange={handleQty}  type="number" min="1" step="1"></input> */}
-
-
-
-
 
       <button
         onClick={handleAddToCart}
