@@ -2,13 +2,13 @@ Rails.application.routes.draw do
 
 # namespace :api do
   
-  resources :selected_items, only: [:create, :index] do
-    resources :items, only: [:index]
-  end
-  
-  
+  resources :purchased_items, only: [:index]
+  resources :selected_items, only: [:create, :index, :show]   
   resources :items, only: [:index]
   # get "/items", to: "items#index"
+  get "/orderhistory", to: "purchased_items#show"
+  get "/shoppingcart", to: "selected_items#show"
+  delete "/purchase", to: "selected_items#destroy"
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

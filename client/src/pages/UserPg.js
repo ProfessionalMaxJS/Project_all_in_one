@@ -5,7 +5,7 @@ function UserPg(){
     const [user, setUser] = useState({})
     
     useEffect(() => {
-        fetch("/me")
+        fetch("/orderhistory")
         .then(r=>r.json())
         .catch(err => console.log(err))
         .then(data => console.log(data))
