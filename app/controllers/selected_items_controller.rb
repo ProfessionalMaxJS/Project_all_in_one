@@ -14,10 +14,8 @@ class SelectedItemsController < ApplicationController
     end
 
     def remove
-        ex_item = @current_user.selected_items.find_by(item_id: params[:item_id])
-        # byebug
-        ex_item.destroy
-        render json: @current_user.selected_items, status: :ok
+        @current_user.selected_items.find_by(item_id: params[:item_id]).destroy
+        render json:@current_user.selected_items, status: :ok
     end
 
     def create
@@ -34,11 +32,19 @@ def destroy
     if @current_user.selected_items.length>0
         points = @current_user.point_tracker
         points +=1
-        @current_user.update(point_tracker: points)
-    end
-    @current_user.selected_items.map{|si| si.destroy}
-        # byebug
-    render json: {"Thanks for your purchase. Points on your account": @current_user[:point_tracker]}, status: :ok
+        if (points == 10)
+            @current_user.update(point_tracker: 0)
+            @current_user.selected_items.map{|si| si.destroy}
+            # byebug
+            render json: {"thanks for your ten purchases! if you can read this, you get a free coffee next time! Points": @current_user[:point_tracker]}, status: :ok
+        else
+            @current_user.update(point_tracker: points)
+            @current_user.selected_items.map{|si| si.destroy}
+            render json: {"Thanks for your purchase. Points on your account": @current_user[:point_tracker]}, status: :ok
+        end
+    else
+        render json: {error: "empty cart"}, status: :ok
+    end        
 end
 
     private
