@@ -1,22 +1,21 @@
 import React from "react";
 import ImageOne from "../images/chakra-waffle.jpeg";
-function SelectedItemCard({ item, setItems }) {
+function SelectedItemCard({ item, setChange }) {
 
 function handleRemove(){
 console.log(item.id)
-  // fetch("/remove", {
-  //   method: "PATCH",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({ item_id: item.id }),
-  // })
-  //   .then((r) => r.json())
-  //   .catch((err) => console.log(err))
-  //   .then((data) => {
-  //     setItems(data);
-  //     // setChange(Math.random());
-  //   });
+  fetch("/remove", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ item_id: item.id }),
+  })
+    .then((r) => r.json())
+    .catch((err) => console.log(err))
+    .then((data) => {
+      setChange(Math.random());
+    });
 }
 
   return (

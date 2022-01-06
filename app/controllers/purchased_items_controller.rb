@@ -1,16 +1,13 @@
 class PurchasedItemsController < ApplicationController
-
+    skip_before_action :authorize, only: [:index]
+    
 def index
     # byebug
     render json: PurchasedItem.all, status: :ok
 end
 
 def show
-    if session[:user_id]
-        render json: PurchasedItem.all.filter{|pi| pi[:user_id]==session[:user_id]}.map{|pi| pi.item}, status: :ok
-    else
-        render json: {error: "FORBIDDEN"}, status: :unauthorized
-    end
-    end
+    render json: @current_user.purchased_items.map{|pi| pi.item}, status: :ok
+end
 
 end

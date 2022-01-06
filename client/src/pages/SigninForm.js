@@ -71,7 +71,7 @@ function SigninForm({ setUserData, setIsLoggedIn, userData }) {
         </div>
         <Link
           onClick={handleSignIn}
-          to="/UserPg"
+          to="/SigninForm"
           className="mt-5 py-6 px-10 bg-cyan-300 shadow-lg rounded-full text-3xl hover:bg-cyan-100 transition duration-300 ease-in-out flex items-center"
         >
           Sign In
