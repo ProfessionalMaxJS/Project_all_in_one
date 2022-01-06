@@ -1,6 +1,24 @@
 import React from "react";
 import ImageOne from "../images/chakra-waffle.jpeg";
-function SelectedItemCard({ item }) {
+function SelectedItemCard({ item, setItems }) {
+
+function handleRemove(){
+console.log(item.id)
+  // fetch("/remove", {
+  //   method: "PATCH",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({ item_id: item.id }),
+  // })
+  //   .then((r) => r.json())
+  //   .catch((err) => console.log(err))
+  //   .then((data) => {
+  //     setItems(data);
+  //     // setChange(Math.random());
+  //   });
+}
+
   return (
     <div className="  bg-black mx-auto flex justify-between items-center  shadow-lg rounded p-2">
       <img src={ImageOne} alt="egg" className="rounded" />
@@ -15,7 +33,7 @@ function SelectedItemCard({ item }) {
           <span className="text-green-400 mr-1">$</span>
           {item.price}
         </p>
-        <button className="text-white mb-3 bg-red-500 rounded p-2 border hover:animate-pulse">
+        <button onClick={handleRemove} className="text-white mb-3 bg-red-500 rounded p-2 border hover:animate-pulse">
           Remove From Cart
         </button>
       </div>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index]
   # get "/items", to: "items#index"
 
+  patch "/remove", to: "selected_items#remove"
   get "/orderhistory", to: "purchased_items#show"
   get "/shoppingcart", to: "selected_items#show"
   delete "/purchase", to: "selected_items#destroy"

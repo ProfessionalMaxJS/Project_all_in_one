@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
 function Cart() {
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
+
   useEffect(() => {
     fetch("/shoppingcart")
       .then((r) => r.json())
@@ -36,7 +37,7 @@ function Cart() {
         items.map((item) => {
           return (
             <div className="mx-auto px-2 py-2 container rounded">
-              <SelectedItemCard key={item.id} item={item} />
+              <SelectedItemCard key={item.id} setItems={setItems} item={item} />
             </div>
           );
         })

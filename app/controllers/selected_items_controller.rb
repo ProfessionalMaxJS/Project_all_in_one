@@ -13,6 +13,13 @@ class SelectedItemsController < ApplicationController
     end
     end
 
+    def remove
+        ex_item = @current_user.selected_items.find_by(item_id: params[:item_id])
+        # byebug
+        ex_item.destroy
+        render json: @current_user.selected_items, status: :ok
+    end
+
     def create
         # byebug
         new_selected_item = SelectedItem.create!({item_id: params[:item_id], quantity_selected: 1, user_id: session[:user_id]}) #quantity_selected: params[:quantity_selected]

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    # skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: :create
 
 def create
     # byebug
@@ -18,8 +18,7 @@ def check
 end
 
 def show
-    user = User.find(session[:user_id])
-    render json: user, status: :ok
+    render json: @current_user, status: :ok
   end
 
 private
