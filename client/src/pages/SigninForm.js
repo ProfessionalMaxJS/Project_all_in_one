@@ -26,9 +26,12 @@ function SigninForm({ setUserData, setIsLoggedIn, userData }) {
         console.log(err);
       })
       .then((data) => {
-        setUserData(data);
-        if (Object.keys(data).length !== 0) {
-          setIsLoggedIn(false);
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          setUserData(data);
+          setIsLoggedIn(true);
+          console.log(data);
         }
       })
       .then(

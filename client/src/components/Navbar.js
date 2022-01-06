@@ -34,11 +34,13 @@ function Navbar({
       .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => {
-        setCount(data);
-        let newData = data.map((d) => parseFloat(d.price));
-        console.log(newData);
-        let tot = newData.reduce((counter, nD) => (counter += nD));
-        setCountu(tot);
+        if (data != "") {
+          setCount(data);
+          let newData = data.map((d) => parseFloat(d.price));
+          console.log(newData);
+          let tot = newData.reduce((counter, nD) => (counter += nD));
+          setCountu(tot);
+        }
       });
   }, [change]);
 
@@ -68,7 +70,7 @@ function Navbar({
         </svg>
       </div>
       <div className="md:flex items-center pr-8 hidden">
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <Link className="p-4 flex" to="/" onClick={handleSignOut}>
             logout
             <svg
@@ -103,8 +105,8 @@ function Navbar({
                 d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
               />
             </svg>
-          </Link> 
-        )}*/}
+          </Link>
+        )}
 
         {/* {isLoggedIn ? (
           <Link className="p-4" to="/UserPg">

@@ -15,7 +15,7 @@ import Cart from "./pages/Cart";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
   const [change, setChange] = useState(null);
   function toggle() {
@@ -39,13 +39,17 @@ function App() {
   useEffect(() => {
     fetch("/me")
       .then((r) => r.json())
-      .catch((err) => {
-        console.log(err);
-      })
       .then((data) => {
         console.log(data);
+        if (data.errors) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+        }
       });
   }, []);
+
+  console.log(isLoggedIn);
   return (
     // These custom colors are created in the tailwind config file
     <>
