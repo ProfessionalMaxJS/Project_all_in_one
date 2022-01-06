@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ItemCard from "../components/ItemCard";
 
-function Menu({ setChange }) {
+function Menu({ setChange, images }) {
   const [bestSellers, setBestSellers] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,12 @@ function Menu({ setChange }) {
         {bestSellers
           ? bestSellers.map((item) => {
               return (
-                <ItemCard setChange={setChange} key={item.id} item={item} />
+                <ItemCard
+                  setChange={setChange}
+                  key={item.id}
+                  item={item}
+                  images={images}
+                />
               );
             })
           : []}

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
-function Cart() {
+function Cart({ change, setChange, images }) {
   const [items, setItems] = useState([]);
-  const [change, setChange] = useState(0);
+  // const [change, setChange] = useState(0);
 
   useEffect(() => {
     fetch("/shoppingcart")
@@ -25,9 +25,9 @@ function Cart() {
       .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => console.log(data))
-      .then(setChange(Math.random()))
+      .then(setChange(Math.random()));
   }
-
+  console.log(items);
   return (
     <div className="bg-gradient-to-t from-white to bg-cyan-400  flex-col justify-between items-center text-center">
       {items === null ? (
@@ -38,7 +38,12 @@ function Cart() {
         items.map((item) => {
           return (
             <div className="mx-auto px-2 py-2 container rounded">
-              <SelectedItemCard key={item.id} setChange={setChange} item={item} />
+              <SelectedItemCard
+                key={item.id}
+                setChange={setChange}
+                item={item}
+                images={images}
+              />
             </div>
           );
         })
