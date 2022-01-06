@@ -1,13 +1,19 @@
-import {useEffect} from 'react'
+import {useState, useEffect} from 'react'
 
 function Cart(){
 
+    const [total, setTotal] = useState(0)
     useEffect(() => {
         fetch("/shoppingcart")
         .then(r=>r.json())
         .catch(err => console.log(err))
-        .then(data => console.log(data))
-    }, []);
+        .then(data => {console.log(data)
+            let newData = data.map(d=>parseFloat(d.price))
+            console.log(newData)
+            let tot = newData.reduce((counter, nD)=>counter+=nD)
+            console.log(tot)})
+        }, []);
+        
 
     function handlePurchase(){
         fetch("/purchase", {

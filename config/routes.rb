@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   resources :selected_items, only: [:create, :index, :show]   
   resources :items, only: [:index]
   # get "/items", to: "items#index"
+
   get "/orderhistory", to: "purchased_items#show"
   get "/shoppingcart", to: "selected_items#show"
   delete "/purchase", to: "selected_items#destroy"
   get "/me", to: "users#show"
+  get "/verify", to: "users#check"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"

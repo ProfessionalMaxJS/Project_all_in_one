@@ -12,11 +12,10 @@ import SignupForm from "./pages/SignupForm";
 import SigninForm from "./pages/SigninForm";
 import UserPg from "./pages/UserPg";
 import Cart from "./pages/Cart";
-import Cookies from "js-cookie";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userData, setUserData] = useState(null);
   function toggle() {
     setIsOpen(!isOpen);

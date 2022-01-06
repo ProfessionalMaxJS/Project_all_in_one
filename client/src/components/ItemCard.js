@@ -7,18 +7,24 @@ function ItemCard({ item }) {
 
   function handleAddToCart(){
     console.log(item.id)
-      fetch("/selected_items", {
+    fetch("/selected_items", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({item_id:item.id}),
-      })
-        .then(r => r.json())
-        .catch(err => console.log(err))
-        .then(data => console.log(data))
-        // .then(setUser({name:"", email:"", password:"",password_confirmation:""}))
-  }
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({item_id:item.id/*, quantity_selected:qty*/}),
+        })
+          .then(r => r.json())
+          .catch(err => console.log(err))
+          .then(data => console.log(data))
+          // .then(setQty(1))
+      }
+      
+      // const [qty, setQty] = useState(1)
+      // function handleQty(e){
+      //   setQty(e.target.value)
+      //   console.log(e.target.value)
+      // }
 
   const [shown, setIsShown] = useState(false);
   
@@ -28,6 +34,16 @@ function ItemCard({ item }) {
       <h2 className="font-bold text-xl text-white">{item.name}</h2>
       <p className="text-white text-center italic">{item.description}</p>
       <p className="text-white text-center text-sm">${item.price}</p>
+
+
+
+
+      {/* <input value={qty} onChange={handleQty}  type="number" min="1" step="1"></input> */}
+
+
+
+
+
       <button
         onClick={handleAddToCart}
         onMouseEnter={() => setIsShown(true)}

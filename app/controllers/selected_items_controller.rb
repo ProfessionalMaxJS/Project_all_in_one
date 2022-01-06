@@ -15,7 +15,7 @@ class SelectedItemsController < ApplicationController
 
     def create
         # byebug
-        new_selected_item = SelectedItem.create!({item_id: params[:item_id], user_id: session[:user_id], quantity_selected: 1})
+        new_selected_item = SelectedItem.create!({item_id: params[:item_id], quantity_selected: 1, user_id: session[:user_id]}) #quantity_selected: params[:quantity_selected]
         render json: new_selected_item, status: :created
     end
 
@@ -33,7 +33,7 @@ def destroy
     private
 
     def si_params
-        params.permit(:item_id)
+        params.permit(:item_id, :quantity_selected)
     end
 
 end

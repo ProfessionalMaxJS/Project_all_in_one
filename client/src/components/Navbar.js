@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../images/Logo.jpeg";
 
 function Navbar({ handleToggle, isLoggedIn, setIsLoggedIn, setUserData }) {
+  
   function handleSignOut() {
     fetch("/logout", {
       method: "DELETE",
@@ -14,6 +15,15 @@ function Navbar({ handleToggle, isLoggedIn, setIsLoggedIn, setUserData }) {
         setIsLoggedIn(false);
       });
   }
+
+  function handleVerify(){
+    fetch("/verify")
+    .then(r=>r.json())
+    .catch(err=>console.warn({err}))
+    .then(data=>console.log(data))
+  }
+
+  
 
   return (
     <nav
@@ -41,7 +51,10 @@ function Navbar({ handleToggle, isLoggedIn, setIsLoggedIn, setUserData }) {
         </svg>
       </div>
       <div className="md:flex items-center pr-8 hidden">
-        {isLoggedIn ? (
+
+
+
+        {/* {isLoggedIn ? (
           <Link className="p-4 flex" to="/" onClick={handleSignOut}>
             logout
             <svg
@@ -76,13 +89,19 @@ function Navbar({ handleToggle, isLoggedIn, setIsLoggedIn, setUserData }) {
                 d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
               />
             </svg>
-          </Link>
-        )}
-        {isLoggedIn ? (
+          </Link> 
+        )}*/}
+
+
+
+        {/* {isLoggedIn ? (
           <Link className="p-4" to="/UserPg">
             Me
           </Link>
-        ) : null}
+        ) : null} */}
+
+      <button onClick={handleVerify}>ABC</button>
+
         <Link className="p-2" to="/Menu">
           Menu
         </Link>

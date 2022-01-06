@@ -9,6 +9,14 @@ def create
     render json: new_user, status: :created 
 end
 
+def check
+    if session[:user_id]
+        render json: true
+    else
+        render json: false
+    end
+end
+
 def show
     user = User.find(session[:user_id])
     render json: user, status: :ok
