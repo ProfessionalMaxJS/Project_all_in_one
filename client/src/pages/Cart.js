@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
-function Cart({ change, setChange, images, setCountu }) {
-  const [items, setItems] = useState([]);
-  const [tot, setTot] = useState(0);
+function Cart({ setChange, images, tot, items, setItems, setCount, setTot }) {
+  // const [items, setItems] = useState([]);
+  // const [tot, setTot] = useState(0);
   // const [change, setChange] = useState(0);
 
-  useEffect(() => {
-    fetch("/shoppingcart")
-      .then((r) => r.json())
-      .catch((err) => console.log(err))
-      .then((data) => {
-        setItems(data);
-        let newData = data.map((d) => parseFloat(d.price));
-        console.log(newData);
-        setTot(newData.reduce((counter, nD) => (counter += nD)));
+  // useEffect(() => {
+  //   fetch("/shoppingcart")
+  //     .then((r) => r.json())
+  //     .catch((err) => console.log(err))
+  //     .then((data) => {
+        // setItems(data);
+        // let newData = data.map((d) => parseFloat(d.price));
+        // console.log(newData);
+        // setTot(newData.reduce((counter, nD) => (counter += nD)));
         // setTot(tot);
-      });
-  }, [change]);
+  //     });
+  // }, []);
 
   function handlePurchase() {
     fetch("/purchase", {
@@ -25,14 +25,18 @@ function Cart({ change, setChange, images, setCountu }) {
     })
       .then((r) => r.json())
       .catch((err) => console.log(err))
-      .then((data) => console.log(data))
-      .then((d) => {
+      .then((data) => {
+        // console.log(data)
+        // setItems(data)
+      // .then((d) => {
         setChange(Math.random());
+        setItems([])
         setTot(0);
-        setCountu(0)
+        setCount(0)
       });
   }
-  console.log(items);
+  // console.log(items);
+
   return (
     <div className="bg-gradient-to-t from-white to bg-cyan-400  flex-col justify-between items-center text-center">
       {items.length === 0 ? (
@@ -44,14 +48,15 @@ function Cart({ change, setChange, images, setCountu }) {
           return (
             <div className="mx-auto px-2 py-2 container rounded">
               <SelectedItemCard
-                setCountu={setCountu}
+                // setCountu={setCountu}
                 key={item.id}
                 setChange={setChange}
+                setCount={setCount}
                 item={item}
                 images={images}
                 setItems={setItems}
                 items={items}
-                setTot={setTot}
+                // setTot={setTot}
               />
             </div>
           );

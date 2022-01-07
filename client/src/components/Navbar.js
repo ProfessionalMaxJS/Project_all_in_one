@@ -6,14 +6,19 @@ function Navbar({
   handleToggle,
   isLoggedIn,
   setIsLoggedIn,
-  setUserData,
-  change,
-  setChange,
-  countu,
-  setCountu
+  // setUserData,
+  // setChange,
+  setCount,
+  setTot,
+  count, 
+  tot
+  // change,
+  // countu,
+  // setCountu
 }) {
-  const [count, setCount] = useState(null);
+  // const [count, setCount] = useState(null);
   // const [countu, setCountu] = useState(null);
+
   function handleSignOut() {
     fetch("/logout", {
       method: "DELETE",
@@ -23,8 +28,10 @@ function Navbar({
       .then((data) => {
         console.log(data);
         setIsLoggedIn(false);
-        setChange(Math.random());
-        setCountu(0);
+        // setChange(Math.random());
+        // console.log(change)
+        setCount(0);
+        setTot(0)
       });
   }
 
@@ -34,21 +41,23 @@ function Navbar({
   //     .catch((err) => console.warn({ err }))
   //     .then((data) => console.log(data));
   // }
-  useEffect(() => {
-    fetch("/shoppingcart")
-      .then((r) => r.json())
-      .catch((err) => console.log(err))
-      .then((data) => {
-        if (data !== "") {
-          setCount(data);
-          let newData = data.map((d) => parseFloat(d.price));
-          console.log(newData);
-          const tot = newData.reduce((counter, nD) => (counter += nD));
-          setCountu(tot);
-        }
-      });
-  }, [change]);
-  // console.log(countu);
+
+  // useEffect(() => {
+  //   fetch("/shoppingcart")
+  //     .then((r) => r.json())
+  //     .catch((err) => console.log(err))
+  //     .then((data) => {
+  //       if (data !== "") {
+  //         setCount(data);
+  //         let newData = data.map((d) => parseFloat(d.price));
+  //         console.log(newData);
+  //         const tot = newData.reduce((counter, nD) => (counter += nD));
+  //         setCountu(tot);
+  //       }
+  //     });
+  // }, [change]);
+  //^^moved to App.js
+
   return (
     <nav
       className="flex justify-between items-center h-16 bg-cyan-400 text-black relative shadow-lg font-mono"
@@ -140,10 +149,10 @@ function Navbar({
             />
           </svg>
           <div className=" ml-1 px-3 font-bold text-white rounded-full bg-black flex items-center justify-center font-mono">
-            {count === null || count.length === undefined ? 0 : count.length} |
+            {count === null ? 0 : count} |
             {""}
             <span className="text-green-400 mr-1 ml-1">$</span>
-            {countu === null ? 0 : countu}
+            {tot === null ? 0 : tot}
           </div>
         </Link>
       </div>

@@ -6,10 +6,10 @@ function SelectedItemCard({
   images,
   setItems,
   items,
-  setTot,
+  setTot
 }) {
   function handleRemove() {
-    console.log(item.id);
+    // console.log(item.id);
     fetch("/remove", {
       method: "PATCH",
       headers: {
@@ -19,19 +19,16 @@ function SelectedItemCard({
     })
       .then((r) => r.json())
       .catch((err) => console.log(err))
-      .then((d) => {
-        setItems(
+      .then(setItems(
           items.filter((i) => {
             return i.id !== item.id;
-          })
-        );
-        setChange(Math.random());
-        if (items.length === 0) {
-          setTot(0);
+          })))
+        .then(setChange(Math.random()))
+        // if (items.length === 0) {
+        //   setTot(0);
         }
-      });
-  }
-  const image = images
+
+        const image = images
     ? images.filter((i) => {
         return i.name === item.name;
       })

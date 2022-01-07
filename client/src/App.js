@@ -16,7 +16,29 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+
   const [change, setChange] = useState(0);
+  const [count, setCount] = useState(0);
+  const [tot, setTot] = useState(0)
+  const [items, setItems] = useState([])
+
+  useEffect(()=>{
+    fetch("/shoppingcart")
+    .then(r=>r.json())
+    .catch(err=>console.log(err))
+    .then(data => {
+      if(data.length === 0){
+        setTot(0)
+        setCount(0)}
+      else
+      {setItems(data)
+      let newData = data.map((d) => parseFloat(d.price));
+      // console.log(newData)
+      setTot(newData.reduce((counter, nD) => (counter += nD)))
+      setCount(data.length)
+      console.log(tot, count)}    
+    })
+  }, [change])
 
   function toggle() {
     setIsOpen(!isOpen);
@@ -78,7 +100,7 @@ function App() {
   
 
 
-  const [countu, setCountu] = useState(0)
+  // const [countu, setCountu] = useState(0)
 
   return (
     // These custom colors are created in the tailwind config file
@@ -87,12 +109,15 @@ function App() {
         handleToggle={toggle}
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
-        setUserData={setUserData}
-
-        change={change}
-        setChange={setChange}
-        countu={countu}
-        setCountu={setCountu}
+        // setUserData={setUserData}
+        setCount={setCount}
+        setTot={setTot}
+        count={count}
+        tot={tot}
+        // setChange={setChange}
+        // change={change}
+        // countu={countu}
+        // setCountu={setCountu}
       />
       <Dropdown isOpen={isOpen} handleToggle={toggle} />
       <Routes>
@@ -122,7 +147,7 @@ function App() {
         <Route
           path="/Cart"
           element={
-            <Cart images={images} change={change} setCountu={setCountu} setChange={setChange} />
+            <Cart images={images} tot={tot} setChange={setChange} items={items} setItems={setItems} setTot={setTot} setCount={setCount} />
           }
         />
       </Routes>

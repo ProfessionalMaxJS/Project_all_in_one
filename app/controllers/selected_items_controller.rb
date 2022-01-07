@@ -17,7 +17,7 @@ class SelectedItemsController < ApplicationController
     def create
         # byebug
 
-        @current_user.selected_items.create!({item_id: params[:item_id], quantity_selected: 1)
+        @current_user.selected_items.create!(item_id: params[:item_id], quantity_selected: 1)
         render json: @current_user.selected_items.map{|si| si.item}, status: :ok
         # new_selected_item = SelectedItem.create!({item_id: params[:item_id], quantity_selected: 1, user_id: session[:user_id]}) #quantity_selected: params[:quantity_selected]
         # render json: new_selected_item, status: :created
