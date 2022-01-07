@@ -38,7 +38,7 @@ function App() {
       setCount(data.length)
       console.log(tot, count)}    
     })
-  }, [change])
+  }, [change, count, tot])
 
   function toggle() {
     setIsOpen(!isOpen);
@@ -130,7 +130,7 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route
           path="/SignupForm"
-          element={<SignupForm setChange={setChange} />}
+          element={<SignupForm setChange={setChange} setIsLoggedIn={setIsLoggedIn}/>}
         />
         <Route
           path="/SigninForm"

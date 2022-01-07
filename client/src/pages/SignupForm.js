@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Avatar from "../images/AvatarMaker.png";
 import { Link } from "react-router-dom";
 
-function SignupForm({ setChange }) {
+function SignupForm({ setChange, setIsLoggedIn }) {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -35,14 +35,15 @@ function SignupForm({ setChange }) {
           email: "",
           password: "",
           password_confirmation: "",
-        })
+        }),
+        setIsLoggedIn(true)
       );
   }
   // console.log(user);
   return (
     <div class="bg-gradient-to-t from-white to bg-cyan-400 h-screen flex justify-center items-center">
       <form class="flex flex-col justify-center items-center w-1/2">
-        <img src={Avatar} class="w-32" />
+        <img src={Avatar} alt="Avatar" class="w-32" />
         <h2 class="my-8 font-display font-bold text-3xl text-gray-700 text-center">
           Sign Up
         </h2>
@@ -92,7 +93,7 @@ function SignupForm({ setChange }) {
         </div>
         <Link
           onClick={handleSignUp}
-          to="/UserPg"
+          to="/Menu"
           className="mt-5 py-6 px-10 bg-cyan-300 shadow-lg rounded-full text-3xl hover:bg-cyan-100 transition duration-300 ease-in-out flex items-center"
         >
           Sign Up
