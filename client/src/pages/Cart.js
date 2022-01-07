@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
-function Cart({ change, setChange, images }) {
+function Cart({ change, setChange, images, setCountu }) {
   const [items, setItems] = useState([]);
   const [tot, setTot] = useState(0);
   // const [change, setChange] = useState(0);
@@ -29,6 +29,7 @@ function Cart({ change, setChange, images }) {
       .then((d) => {
         setChange(Math.random());
         setTot(0);
+        setCountu(0)
       });
   }
   console.log(items);

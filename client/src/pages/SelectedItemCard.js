@@ -1,5 +1,5 @@
 import React from "react";
-import ImageOne from "../images/chakra-waffle.jpeg";
+// import ImageOne from "../images/chakra-waffle.jpeg";
 function SelectedItemCard({
   item,
   setChange,

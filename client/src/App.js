@@ -74,6 +74,7 @@ function App() {
         }
       });
   }, []);
+  const [countu, setCountu] = useState(0)
 
   return (
     // These custom colors are created in the tailwind config file
@@ -85,6 +86,8 @@ function App() {
         setUserData={setUserData}
         change={change}
         setChange={setChange}
+        countu={countu}
+        setCountu={setCountu}
       />
       <Dropdown isOpen={isOpen} handleToggle={toggle} />
       <Routes>
@@ -114,7 +117,7 @@ function App() {
         <Route
           path="/Cart"
           element={
-            <Cart images={images} change={change} setChange={setChange} />
+            <Cart images={images} change={change} setCountu={setCountu} setChange={setChange} />
           }
         />
       </Routes>

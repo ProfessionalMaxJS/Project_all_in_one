@@ -9,9 +9,11 @@ function Navbar({
   setUserData,
   change,
   setChange,
+  countu,
+  setCountu
 }) {
   const [count, setCount] = useState(null);
-  const [countu, setCountu] = useState(null);
+  // const [countu, setCountu] = useState(null);
   function handleSignOut() {
     fetch("/logout", {
       method: "DELETE",
@@ -26,12 +28,12 @@ function Navbar({
       });
   }
 
-  function handleVerify() {
-    fetch("/verify")
-      .then((r) => r.json())
-      .catch((err) => console.warn({ err }))
-      .then((data) => console.log(data));
-  }
+  // function handleVerify() {
+  //   fetch("/verify")
+  //     .then((r) => r.json())
+  //     .catch((err) => console.warn({ err }))
+  //     .then((data) => console.log(data));
+  // }
   useEffect(() => {
     fetch("/shoppingcart")
       .then((r) => r.json())
@@ -46,7 +48,7 @@ function Navbar({
         }
       });
   }, [change]);
-  console.log(countu);
+  // console.log(countu);
   return (
     <nav
       className="flex justify-between items-center h-16 bg-cyan-400 text-black relative shadow-lg font-mono"
@@ -117,7 +119,7 @@ function Navbar({
           </Link>
         ) : null} */}
 
-        <button onClick={handleVerify}>ABC</button>
+        {/* <button onClick={handleVerify}>ABC</button> */}
 
         <Link className="p-2" to="/Menu">
           Menu
