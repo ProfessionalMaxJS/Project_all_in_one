@@ -27,10 +27,12 @@ function SigninForm({ setUserData, setIsLoggedIn, userData, setChange }) {
       })
       .then((data) => {
         if (data.error) {
+          alert("Login Failed; Incorrect Name/Password Combination. Or Maye You Haven't Signed Up?")
           console.log(data.error);
         } else {
           setUserData(data);
           setIsLoggedIn(true);
+          alert("Success! Welcome Back.")
           console.log(data);
           setChange(Math.random());
         }
