@@ -19,9 +19,10 @@ function ItemCard({ item, setChange, images }) {
       body: JSON.stringify({ item_id: item.id /*, quantity_selected:qty*/ }),
     })
       .then((r) => r.json())
-      .catch((err) => console.log(err))
+      // .catch((err) => {console.log(err);  alert("Hungry? Sign Up or Log In to Order!")})
       .then((data) => {
         console.log(data);
+        if(data.errors){alert("Hungry? Sign Up or Log In to Order!")}
         setChange(Math.random());
       });
     // .then(setQty(1))
