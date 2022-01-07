@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/Logo.jpeg";
 
 function Navbar({
@@ -18,6 +18,8 @@ function Navbar({
 }) {
   // const [count, setCount] = useState(null);
   // const [countu, setCountu] = useState(null);
+
+  const navTest = useNavigate()
 
   function handleSignOut() {
     fetch("/logout", {
@@ -57,6 +59,11 @@ function Navbar({
   //     });
   // }, [change]);
   //^^moved to App.js
+
+function handleBounce(){
+  // console.log(isLoggedIn)
+  isLoggedIn ? navTest("/Cart") : alert("Hungry? Sign Up or Log In to Order!")
+}
 
   return (
     <nav
@@ -133,7 +140,8 @@ function Navbar({
         <Link className="p-2" to="/Menu">
           Menu
         </Link>
-        <Link className=" flex flex-row" to="/Cart">
+        <button  className=" flex flex-row" onClick={handleBounce}>
+        
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -154,7 +162,7 @@ function Navbar({
             <span className="text-green-400 mr-1 ml-1">$</span>
             {tot === null ? 0 : tot}
           </div>
-        </Link>
+        </button>
       </div>
     </nav>
   );
