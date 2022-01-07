@@ -34,8 +34,8 @@ function Cart({ change, setChange, images }) {
   console.log(items);
   return (
     <div className="bg-gradient-to-t from-white to bg-cyan-400  flex-col justify-between items-center text-center">
-      {items === null ? (
-        <div className="lg:text-7xl md:text-5xl sm:text-3xl text-xl font-black pt-40 text-black animate-pulse hover:animate-none underline decoration-white cursor-pointer">
+      {items.length === 0 ? (
+        <div className="lg:text-7xl md:text-5xl sm:text-3xl text-xl font-black pt-40 text-black animate-pulse hover:animate-none underline decoration-white cursor-pointer mb-10">
           <Link to="/Menu">Add Items Now</Link>
         </div>
       ) : (
@@ -47,21 +47,28 @@ function Cart({ change, setChange, images }) {
                 setChange={setChange}
                 item={item}
                 images={images}
+                setItems={setItems}
+                items={items}
+                setTot={setTot}
               />
             </div>
           );
         })
       )}
-      <div className=" text-3xl mx-auto container content-center border p-10 border-black underline-offset-1 decoration-green-300 rounded bg-black text-white font-bold">
-        Total <span className="text-green-500">$</span>
-        {tot}
-      </div>
-      <button
-        className="text-white mt-10 mb-3 bg-green-700 rounded p-5 border hover:animate-pulse animate-bounce"
-        onClick={handlePurchase}
-      >
-        Purchase
-      </button>
+      {items.length > 0 ? (
+        <>
+          <div className=" text-3xl mx-auto container content-center border p-10 border-black underline-offset-1 decoration-green-300 rounded bg-black text-white font-bold">
+            Total <span className="text-green-500">$</span>
+            {tot}
+          </div>
+          <button
+            className="text-white mt-10 mb-3 bg-green-700 rounded p-5 border hover:animate-pulse animate-bounce"
+            onClick={handlePurchase}
+          >
+            Purchase
+          </button>{" "}
+        </>
+      ) : null}
     </div>
   );
 }

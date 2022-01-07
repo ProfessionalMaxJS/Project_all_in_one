@@ -1,6 +1,13 @@
 import React from "react";
 import ImageOne from "../images/chakra-waffle.jpeg";
-function SelectedItemCard({ item, setChange, images }) {
+function SelectedItemCard({
+  item,
+  setChange,
+  images,
+  setItems,
+  items,
+  setTot,
+}) {
   function handleRemove() {
     console.log(item.id);
     fetch("/remove", {
@@ -12,7 +19,17 @@ function SelectedItemCard({ item, setChange, images }) {
     })
       .then((r) => r.json())
       .catch((err) => console.log(err))
-      .then(setChange(Math.random()));
+      .then((d) => {
+        setItems(
+          items.filter((i) => {
+            return i.id !== item.id;
+          })
+        );
+        setChange(Math.random());
+        if (items.length === 0) {
+          setTot(0);
+        }
+      });
   }
   const image = images
     ? images.filter((i) => {
