@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.69caf419.css",
+    "main.js": "/static/js/main.07427bc6.js",
+    "static/js/787.070db070.chunk.js": "/static/js/787.070db070.chunk.js",
+    "static/media/chakra-waffle.jpeg": "/static/media/chakra-waffle.ce82e5da9089df39c18b.jpeg",
+    "static/media/ocean-bagel.jpeg": "/static/media/ocean-bagel.4d23d9ac9c60ba2bbde1.jpeg",
+    "static/media/AvatarMaker.png": "/static/media/AvatarMaker.354d8f58dab8addf852d.png",
+    "index.html": "/index.html",
+    "main.69caf419.css.map": "/static/css/main.69caf419.css.map",
+    "main.07427bc6.js.map": "/static/js/main.07427bc6.js.map",
+    "787.070db070.chunk.js.map": "/static/js/787.070db070.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.69caf419.css",
+    "static/js/main.07427bc6.js"
+  ]
+}

@@ -14,8 +14,8 @@ function Cart({ change, setChange, images, setCountu }) {
         setItems(data);
         let newData = data.map((d) => parseFloat(d.price));
         console.log(newData);
-        let tot = newData.reduce((counter, nD) => (counter += nD));
-        setTot(tot);
+        setTot(newData.reduce((counter, nD) => (counter += nD)));
+        // setTot(tot);
       });
   }, [change]);
 
@@ -44,6 +44,7 @@ function Cart({ change, setChange, images, setCountu }) {
           return (
             <div className="mx-auto px-2 py-2 container rounded">
               <SelectedItemCard
+                setCountu={setCountu}
                 key={item.id}
                 setChange={setChange}
                 item={item}

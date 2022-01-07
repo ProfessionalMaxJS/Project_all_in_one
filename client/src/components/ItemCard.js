@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import ImageOne from "../images/chakra-waffle.jpeg";
-import { Link } from "react-router-dom";
 
 function ItemCard({ item, setChange, images }) {
   // const [foodData, setFoodData] = useState({...item})
@@ -10,8 +8,9 @@ function ItemCard({ item, setChange, images }) {
         return i.name === item.name;
       })
     : null;
+
   function handleAddToCart() {
-    console.log(item.id);
+    // console.log(item.id);
     fetch("/selected_items", {
       method: "POST",
       headers: {

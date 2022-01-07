@@ -1,5 +1,4 @@
 import "./App.css";
-import Products from "./components/products/products/Products";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useState, useEffect } from "react";
@@ -17,7 +16,8 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [change, setChange] = useState(null);
+  const [change, setChange] = useState(0);
+
   function toggle() {
     setIsOpen(!isOpen);
   }
@@ -60,7 +60,7 @@ function App() {
     return () => {
       window.removeEventListener("resize", hideMenu);
     };
-  }, [window.innerWidth]);
+  }, [isOpen]);
 
   useEffect(() => {
     fetch("/me")
@@ -74,6 +74,10 @@ function App() {
         }
       });
   }, []);
+
+  
+
+
   const [countu, setCountu] = useState(0)
 
   return (
@@ -84,6 +88,7 @@ function App() {
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         setUserData={setUserData}
+
         change={change}
         setChange={setChange}
         countu={countu}
