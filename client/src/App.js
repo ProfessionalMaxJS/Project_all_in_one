@@ -89,13 +89,16 @@ function App() {
       <Dropdown isOpen={isOpen} handleToggle={toggle} />
       <Routes>
         {/* for the route, it doesn't want a child but a child element  */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home images={images} />} />
         <Route
           path="/Menu"
           element={<Menu images={images} setChange={setChange} />}
         />
         <Route path="/Signup" element={<Signup />} />
-        <Route path="/SignupForm" element={<SignupForm />} />
+        <Route
+          path="/SignupForm"
+          element={<SignupForm setChange={setChange} />}
+        />
         <Route
           path="/SigninForm"
           element={
@@ -103,6 +106,7 @@ function App() {
               setUserData={setUserData}
               setIsLoggedIn={setIsLoggedIn}
               userData={userData}
+              setChange={setChange}
             />
           }
         />

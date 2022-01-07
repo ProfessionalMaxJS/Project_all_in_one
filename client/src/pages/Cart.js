@@ -3,6 +3,7 @@ import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
 function Cart({ change, setChange, images }) {
   const [items, setItems] = useState([]);
+  const [tot, setTot] = useState(0);
   // const [change, setChange] = useState(0);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ function Cart({ change, setChange, images }) {
         let newData = data.map((d) => parseFloat(d.price));
         console.log(newData);
         let tot = newData.reduce((counter, nD) => (counter += nD));
-        console.log(tot);
+        setTot(tot);
       });
   }, [change]);
 
@@ -25,7 +26,10 @@ function Cart({ change, setChange, images }) {
       .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => console.log(data))
-      .then(setChange(Math.random()));
+      .then((d) => {
+        setChange(Math.random());
+        setTot(0);
+      });
   }
   console.log(items);
   return (
@@ -48,8 +52,12 @@ function Cart({ change, setChange, images }) {
           );
         })
       )}
+      <div className=" text-3xl mx-auto container content-center border p-10 border-black underline-offset-1 decoration-green-300 rounded bg-black text-white font-bold">
+        Total <span className="text-green-500">$</span>
+        {tot}
+      </div>
       <button
-        className="mt-20 text-2xl border bg-black text-white p-3"
+        className="text-white mt-10 mb-3 bg-green-700 rounded p-5 border hover:animate-pulse animate-bounce"
         onClick={handlePurchase}
       >
         Purchase

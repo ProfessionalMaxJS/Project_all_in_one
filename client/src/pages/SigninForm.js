@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Avatar from "../images/AvatarMaker.png";
 
-function SigninForm({ setUserData, setIsLoggedIn, userData }) {
+function SigninForm({ setUserData, setIsLoggedIn, userData, setChange }) {
   const [user, setUser] = useState({
     name: "",
     password: "",
@@ -32,6 +32,7 @@ function SigninForm({ setUserData, setIsLoggedIn, userData }) {
           setUserData(data);
           setIsLoggedIn(true);
           console.log(data);
+          setChange(Math.random());
         }
       })
       .then(

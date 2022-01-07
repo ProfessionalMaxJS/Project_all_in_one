@@ -8,7 +8,7 @@ function Navbar({
   setIsLoggedIn,
   setUserData,
   change,
-  // setChange
+  setChange,
 }) {
   const [count, setCount] = useState(null);
   const [countu, setCountu] = useState(null);
@@ -21,6 +21,8 @@ function Navbar({
       .then((data) => {
         console.log(data);
         setIsLoggedIn(false);
+        setChange(Math.random());
+        setCountu(0);
       });
   }
 
@@ -35,16 +37,16 @@ function Navbar({
       .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => {
-        if (data != "") {
+        if (data !== "") {
           setCount(data);
           let newData = data.map((d) => parseFloat(d.price));
           console.log(newData);
-          let tot = newData.reduce((counter, nD) => (counter += nD));
+          const tot = newData.reduce((counter, nD) => (counter += nD));
           setCountu(tot);
         }
       });
   }, [change]);
-
+  console.log(countu);
   return (
     <nav
       className="flex justify-between items-center h-16 bg-cyan-400 text-black relative shadow-lg font-mono"
@@ -136,9 +138,10 @@ function Navbar({
             />
           </svg>
           <div className=" ml-1 px-3 font-bold text-white rounded-full bg-black flex items-center justify-center font-mono">
-            {count === null ? 0 : count.length} |{""}
+            {count === null || count.length === undefined ? 0 : count.length} |
+            {""}
             <span className="text-green-400 mr-1 ml-1">$</span>
-            {countu}
+            {countu === null ? 0 : countu}
           </div>
         </Link>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Avatar from "../images/AvatarMaker.png";
 import { Link } from "react-router-dom";
 
-function SignupForm() {
+function SignupForm({ setChange }) {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -23,10 +23,20 @@ function SignupForm() {
       },
       body: JSON.stringify(user),
     })
-      .then(r => r.json())
-      .catch(err => console.log(err))
-      .then(data => console.log(data))
-      .then(setUser({name:"", email:"", password:"",password_confirmation:""}))
+      .then((r) => r.json())
+      .catch((err) => console.log(err))
+      .then((data) => {
+        console.log(data);
+        setChange(Math.random());
+      })
+      .then(
+        setUser({
+          name: "",
+          email: "",
+          password: "",
+          password_confirmation: "",
+        })
+      );
   }
   // console.log(user);
   return (
@@ -81,7 +91,7 @@ function SignupForm() {
           />
         </div>
         <Link
-          onClick = {handleSignUp}
+          onClick={handleSignUp}
           to="/UserPg"
           className="mt-5 py-6 px-10 bg-cyan-300 shadow-lg rounded-full text-3xl hover:bg-cyan-100 transition duration-300 ease-in-out flex items-center"
         >

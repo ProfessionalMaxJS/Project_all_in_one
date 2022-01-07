@@ -14,13 +14,19 @@ function SelectedItemCard({ item, setChange, images }) {
       .catch((err) => console.log(err))
       .then(setChange(Math.random()));
   }
-  const image = images.filter((i) => {
-    return i.name === item.name;
-  });
+  const image = images
+    ? images.filter((i) => {
+        return i.name === item.name;
+      })
+    : null;
 
   return (
     <div className="  bg-black mx-auto flex justify-between items-center  shadow-lg rounded p-2">
-      <img src={image[0].src} alt="egg" className="rounded" />
+      <img
+        src={image !== null ? image[0].src : null}
+        alt="egg"
+        className="rounded"
+      />
       <div className="  ml-2 bg-black h-fit w-screen border border-collapse rounded border-white">
         <h2 className="font-bold text-xl text-white mb-3 border">
           {item.name}

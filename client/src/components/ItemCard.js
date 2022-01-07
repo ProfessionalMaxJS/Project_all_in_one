@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 function ItemCard({ item, setChange, images }) {
   // const [foodData, setFoodData] = useState({...item})
 
-  const image = images.filter((i) => {
-    return i.name === item.name;
-  });
-  console.log(image[0].src);
+  const image = images
+    ? images.filter((i) => {
+        return i.name === item.name;
+      })
+    : null;
   function handleAddToCart() {
     console.log(item.id);
     fetch("/selected_items", {
@@ -37,7 +38,11 @@ function ItemCard({ item, setChange, images }) {
 
   return (
     <div className="  bg-black mb-1 flex flex-col items-center shadow-lg rounded ">
-      <img src={image[0].src} alt="egg" className="rounded" />
+      <img
+        src={image === null ? "" : image[0].src}
+        alt="egg"
+        className="rounded"
+      />
       <h2 className="font-bold text-xl text-white">{item.name}</h2>
       <p className="text-white text-center italic">{item.description}</p>
       <p className="text-white text-center text-sm">${item.price}</p>

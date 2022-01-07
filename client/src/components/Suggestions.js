@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ItemCard from "./ItemCard";
 
-function Suggestions() {
+function Suggestions({ images }) {
   const [bestSellers, setBestSellers] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function Suggestions() {
       <div className=" ml-3 grid lg:grid-cols-3 md:grid-cols-3 gap-3 ">
         {bestSellers
           ? bestSellers.map((item) => {
-              return <ItemCard key={item.id} item={item} />;
+              return <ItemCard images={images} key={item.id} item={item} />;
             })
           : []}
       </div>
