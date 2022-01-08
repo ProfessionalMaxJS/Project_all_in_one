@@ -19,13 +19,12 @@ function Navbar({
   // const [count, setCount] = useState(null);
   // const [countu, setCountu] = useState(null);
 
-  const navTest = useNavigate()
-
+  
   function handleSignOut() {
     fetch("/logout", {
       method: "DELETE",
     })
-      .then((r) => r.json())
+    .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => {
         console.log(data);
@@ -49,20 +48,21 @@ function Navbar({
   //     .then((r) => r.json())
   //     .catch((err) => console.log(err))
   //     .then((data) => {
-  //       if (data !== "") {
-  //         setCount(data);
-  //         let newData = data.map((d) => parseFloat(d.price));
-  //         console.log(newData);
-  //         const tot = newData.reduce((counter, nD) => (counter += nD));
-  //         setCountu(tot);
-  //       }
-  //     });
-  // }, [change]);
-  //^^moved to App.js
-
-function handleBounce(){
-  // console.log(isLoggedIn)
-  isLoggedIn ? navTest("/Cart") : alert("Hungry? Sign Up or Log In to Order!")
+    //       if (data !== "") {
+      //         setCount(data);
+      //         let newData = data.map((d) => parseFloat(d.price));
+      //         console.log(newData);
+      //         const tot = newData.reduce((counter, nD) => (counter += nD));
+      //         setCountu(tot);
+      //       }
+      //     });
+      // }, [change]);
+      //^^moved to App.js
+      
+      const navTest = useNavigate()
+      function handleBounce(){
+        // console.log(isLoggedIn)
+        isLoggedIn ? navTest("/Cart") : alert("Hungry? Sign Up or Log In to Order!")
 }
 
   return (

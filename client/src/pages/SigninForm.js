@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Avatar from "../images/AvatarMaker.png";
 
@@ -12,6 +12,8 @@ function SigninForm({ setUserData, setIsLoggedIn, userData, setChange }) {
   function update(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
+
+const navTest = useNavigate()
 
   function handleSignIn() {
     fetch("/login", {
@@ -32,7 +34,7 @@ function SigninForm({ setUserData, setIsLoggedIn, userData, setChange }) {
         } else {
           setUserData(data);
           setIsLoggedIn(true);
-          alert("Success! Welcome Back.")
+          navTest("/Menu")
           console.log(data);
           setChange(Math.random());
         }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import SelectedItemCard from "./SelectedItemCard";
 import { Link } from "react-router-dom";
 function Cart({ setChange, images, tot, items, setItems, setCount, setTot }) {
@@ -26,7 +26,7 @@ function Cart({ setChange, images, tot, items, setItems, setCount, setTot }) {
       .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => {
-        // console.log(data)
+        console.log(data)
         // setItems(data)
       // .then((d) => {
         setChange(Math.random());

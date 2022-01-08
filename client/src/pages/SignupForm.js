@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Avatar from "../images/AvatarMaker.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignupForm({ setChange, setIsLoggedIn }) {
   const [user, setUser] = useState({
@@ -15,7 +15,12 @@ function SignupForm({ setChange, setIsLoggedIn }) {
     // console.log(user)
   }
 
-  function handleSignUp() {
+  const navTest = useNavigate()
+
+  function handleSignUp(e) {
+
+    e.preventDefault()
+
     fetch("/signup", {
       method: "POST",
       headers: {
@@ -26,23 +31,28 @@ function SignupForm({ setChange, setIsLoggedIn }) {
       .then((r) => r.json())
       .catch((err) => console.log(err))
       .then((data) => {
+        if (data.errors) {
+        alert(data.errors)
+        console.log(data);
+      } else {
         console.log(data);
         setChange(Math.random());
-      })
-      .then(
-        setUser({
-          name: "",
-          email: "",
-          password: "",
-          password_confirmation: "",
-        }),
         setIsLoggedIn(true)
-      );
-  }
-  // console.log(user);
-  return (
-    <div class="bg-gradient-to-t from-white to bg-cyan-400 h-screen flex justify-center items-center">
-      <form class="flex flex-col justify-center items-center w-1/2">
+        navTest("/Menu")
+      }})
+      // .then(
+      //   setUser({
+      //     name: "",
+      //     email: "",
+      //     password: "",
+      //     password_confirmation: "",
+      //   }),
+      // );
+    }
+    // console.log(user);
+    return (
+      <div class="bg-gradient-to-t from-white to bg-cyan-400 h-screen flex justify-center items-center">
+      <form class="flex flex-col justify-center items-center w-1/2" onSubmit={handleSignUp} >
         <img src={Avatar} alt="Avatar" class="w-32" />
         <h2 class="my-8 font-display font-bold text-3xl text-gray-700 text-center">
           Sign Up
@@ -53,7 +63,7 @@ function SignupForm({ setChange, setIsLoggedIn }) {
             name="name"
             type="text"
             placeholder="username"
-            class="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg rounded"
+            class="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 text-lg rounded"
             value={user.name}
             onChange={update}
           />
@@ -91,8 +101,7 @@ function SignupForm({ setChange, setIsLoggedIn }) {
             class="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg rounded"
           />
         </div>
-        <Link
-          onClick={handleSignUp}
+        <button
           to="/Menu"
           className="mt-5 py-6 px-10 bg-cyan-300 shadow-lg rounded-full text-3xl hover:bg-cyan-100 transition duration-300 ease-in-out flex items-center"
         >
@@ -111,7 +120,7 @@ function SignupForm({ setChange, setIsLoggedIn }) {
               d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
             />
           </svg>
-        </Link>
+        </button>
         <p className=" mt-3 text-sm font-mono italic mb-14  text-black">
           Already have an account?{" "}
           <Link to="/SigninForm" className="font-bold hover:text-cyan-400">
