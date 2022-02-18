@@ -30,12 +30,12 @@ const navTest = useNavigate()
       .then((data) => {
         if (data.error) {
           alert("Login Failed; Incorrect Name/Password Combination. Or Maye You Haven't Signed Up?")
-          console.log(data.error);
+          // console.log(data.error);
         } else {
           setUserData(data);
           setIsLoggedIn(true);
           navTest("/Menu")
-          console.log(data);
+          // console.log(data);
           setChange(Math.random());
         }
       })

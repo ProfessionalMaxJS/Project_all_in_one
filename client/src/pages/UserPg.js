@@ -4,12 +4,12 @@ function UserPg(){
 
     const [user, setUser] = useState({})
     
-    useEffect(() => {
-        fetch("/orderhistory")
-        .then(r=>r.json())
-        .catch(err => console.log(err))
-        .then(data => console.log(data))
-    }, []);
+    // useEffect(() => {
+    //     fetch("/orderhistory")
+    //     .then(r=>r.json())
+    //     .catch(err => console.log(err))
+    //     .then(data => console.log(data))
+    // }, []);
     
     function handleSignOut(){
         fetch("/logout", {
@@ -17,7 +17,7 @@ function UserPg(){
         .then(r => r.json())
         .catch(err => console.log(err))
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setUser(data)})
         }
 return (

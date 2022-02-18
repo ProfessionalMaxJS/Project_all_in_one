@@ -11,7 +11,7 @@ function Menu({ setChange, images }) {
       .then((d) => {
         const tres = d.slice(0, 3);
         setBestSellers(d);
-        console.log(d);
+        // console.log(d);
       });
   }, []);
 

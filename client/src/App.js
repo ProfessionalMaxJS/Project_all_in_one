@@ -36,7 +36,7 @@ function App() {
       // console.log(newData)
       setTot(newData.reduce((counter, nD) => (counter += nD)))
       setCount(data.length)
-      console.log(tot, count)}    
+      // console.log(tot, count)}    
     })
   }, [change, count, tot])
 
@@ -88,7 +88,7 @@ function App() {
     fetch("/me")
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.errors) {
           setIsLoggedIn(false);
         } else {

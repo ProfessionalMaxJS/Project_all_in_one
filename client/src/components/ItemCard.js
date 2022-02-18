@@ -21,7 +21,7 @@ function ItemCard({ item, setChange, images }) {
       .then((r) => r.json())
       // .catch((err) => {console.log(err);  alert("Hungry? Sign Up or Log In to Order!")})
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if(data.errors){alert("Hungry? Sign Up or Log In to Order!")}
         setChange(Math.random());
       });
